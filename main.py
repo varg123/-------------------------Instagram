@@ -4,8 +4,11 @@ import re
 import argparse
 import os
 
+
+# https://blog.jstassen.com/2016/03/code-regex-for-instagram-username-and-hashtags/
 reg_exp_insta_frends = r"(?:@)([A-Za-z0-9_](?:(?:[A-Za-z0-9_]|(?:\.(?!\.))){0,28}(?:[A-Za-z0-9_]))?)"
-reg_exp_url = r"http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+"
+# https://stackoverflow.com/a/28840982
+reg_exp_url = r"http[s]?:\/\/(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+"
 CHECK_USER_EXIST = False
 bot = Bot()
 bot.login(
@@ -18,7 +21,7 @@ def get_parse_url():
     parser = argparse.ArgumentParser()
     parser.add_argument("post_url")
     post_url = parser.parse_args().post_url
-    if not re.match(reg_exp_url, post_url).group(0):
+    if not re.match(reg_exp_url, post_url):
         parser.error("url is incorrect")
     return post_url
 
